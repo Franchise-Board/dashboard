@@ -33,8 +33,9 @@ h1,h2,h3,h4,h5{font-family:'Poppins',sans-serif}
 /* SIDEBAR */
 .sidebar{position:fixed;left:0;top:0;width:var(--sidebar-w);height:100vh;background:var(--secondary-bg);border-right:1px solid var(--card-border);display:flex;flex-direction:column;z-index:100;transition:transform .3s ease}
 .sidebar-logo{padding:28px 24px 20px;display:flex;flex-direction:column;align-items:center;gap:10px;border-bottom:1px solid var(--card-border)}
-.logo-pill{background:rgba(255,255,255,0.08);backdrop-filter:blur(12px);border-radius:12px;padding:14px 20px;display:flex;align-items:center;justify-content:center}
-.logo-pill img{height:36px;width:auto;filter:brightness(0) invert(1)}
+.logo-pill{background:rgba(255,255,255,0.08);backdrop-filter:blur(12px);border-radius:14px;padding:16px 24px;display:flex;align-items:center;justify-content:center;position:relative}
+.logo-pill::before{content:'';position:absolute;inset:-8px;border-radius:20px;background:radial-gradient(ellipse,rgba(0,129,231,0.08) 0%,transparent 70%);z-index:0}
+.logo-pill img{height:55px;width:auto;filter:brightness(0) invert(1);position:relative;z-index:1}
 .sidebar-subtitle{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-secondary);margin-top:4px}
 .sidebar-nav{flex:1;overflow-y:auto;padding:20px 12px}
 .nav-section{margin-bottom:22px}
@@ -128,9 +129,47 @@ tbody tr:hover{background:rgba(0,129,231,0.04)}
 .donut-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:20px;text-align:center}
 .donut-wrap{position:relative;height:220px;margin:0 auto;max-width:220px}
 
-/* SHIMMER */
-.shimmer{background:linear-gradient(90deg,rgba(0,129,231,0.04) 25%,rgba(0,129,231,0.08) 50%,rgba(0,129,231,0.04) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:6px}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+/* KPI ICONS */
+.kpi-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.kpi-icon svg{width:18px;height:18px}
+.kpi-icon.orange{background:rgba(247,147,59,0.12);color:#f7933b}
+.kpi-icon.blue{background:rgba(0,129,231,0.12);color:#0081E7}
+.kpi-icon.green{background:rgba(52,211,153,0.12);color:#34d399}
+.kpi-icon.purple{background:rgba(139,92,246,0.12);color:#8b5cf6}
+.kpi-icon.cyan{background:rgba(6,182,212,0.12);color:#06b6d4}
+.kpi-icon.teal{background:rgba(20,184,166,0.12);color:#14b8a6}
+
+/* FUNNEL */
+.funnel-row{display:flex;flex-direction:column;align-items:center;gap:0;margin-bottom:28px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:28px}
+.funnel-step{position:relative;text-align:center;padding:16px 0;color:#fff;font-weight:600;font-size:13px;border-radius:4px;margin-bottom:2px}
+.funnel-step .f-count{font-family:'Poppins',sans-serif;font-size:22px;font-weight:800;display:block;margin-top:2px}
+.funnel-rate{font-size:11px;color:var(--text-secondary);text-align:center;padding:4px 0}
+
+/* TOP CAMPAIGN */
+.top-camp-card{background:linear-gradient(135deg,rgba(0,129,231,0.06),rgba(32,188,253,0.03));border:1px solid rgba(0,129,231,0.12);border-radius:14px;padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;gap:20px}
+.top-camp-badge{padding:6px 12px;border-radius:8px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:rgba(52,211,153,0.12);color:#34d399}
+.top-camp-name{font-size:14px;font-weight:600;color:var(--text);flex:1}
+.top-camp-cpl{font-family:'Poppins',sans-serif;font-size:20px;font-weight:800;color:#34d399}
+
+/* PAGE HEADER */
+.page-header{margin-bottom:24px}
+.page-header h2{font-family:'Poppins',sans-serif;font-size:22px;font-weight:700;margin-bottom:4px}
+.page-header p{font-size:13px;color:var(--text-secondary)}
+
+/* MONTHLY TABLE */
+.table-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);overflow:hidden;margin-bottom:28px}
+.table-card table{width:100%;border-collapse:collapse;font-size:12px}
+
+/* SKELETON LOADING */
+.skeleton{position:relative;overflow:hidden;background:rgba(0,129,231,0.04);border-radius:12px}
+.skeleton::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(0,129,231,0.06),transparent);animation:shimmer 1.5s infinite}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.skel-kpi{height:120px}
+.skel-chart{height:280px}
+
+/* SHIMMER (legacy) */
+.shimmer{background:linear-gradient(90deg,rgba(0,129,231,0.04) 25%,rgba(0,129,231,0.08) 50%,rgba(0,129,231,0.04) 75%);background-size:200% 100%;animation:shimmer-legacy 1.5s infinite;border-radius:6px}
+@keyframes shimmer-legacy{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
 /* RESPONSIVE */
 @media(max-width:1024px){
@@ -279,6 +318,7 @@ tbody tr:hover{background:rgba(0,129,231,0.04)}
 
     <!-- PAGE: VUE D'ENSEMBLE -->
     <div class="page active" id="page-overview">
+      <div class="page-header"><h2>Vue d'ensemble</h2><p>Performances globales multi-canal</p></div>
       <div class="kpi-grid" id="overviewKpis"></div>
       <div class="charts-row">
         <div class="chart-card"><div class="chart-title">Depenses quotidiennes par canal</div><div class="chart-wrap"><canvas id="chartDailySpend"></canvas></div></div>
@@ -288,10 +328,13 @@ tbody tr:hover{background:rgba(0,129,231,0.04)}
         <div class="donut-card"><div class="chart-title">Repartition budget</div><div class="donut-wrap"><canvas id="chartBudgetDonut"></canvas></div></div>
         <div class="donut-card"><div class="chart-title">Repartition leads</div><div class="donut-wrap"><canvas id="chartLeadsDonut"></canvas></div></div>
       </div>
+      <div class="section-title" style="font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;margin-bottom:16px">Funnel Lead Gen</div>
+      <div class="funnel-row" id="funnelRow"></div>
     </div>
 
     <!-- PAGE: PERFORMANCES -->
     <div class="page" id="page-performances">
+      <div class="page-header"><h2>Performances</h2><p>Analyse détaillée par campagne</p></div>
       <div class="table-wrap">
         <div class="table-header"><h3>Toutes les campagnes</h3></div>
         <div class="table-scroll"><table id="tablePerf"><thead><tr><th data-sort="name">Campagne</th><th data-sort="source">Source</th><th data-sort="spend">Depenses</th><th data-sort="impressions">Impressions</th><th data-sort="clicks">Clics</th><th data-sort="ctr">CTR</th><th data-sort="leads">Leads/Conv</th><th data-sort="cpl">CPL</th></tr></thead><tbody></tbody></table></div>
@@ -300,10 +343,14 @@ tbody tr:hover{background:rgba(0,129,231,0.04)}
         <div class="chart-card"><div class="chart-title">Top 10 campagnes par leads</div><div class="chart-wrap"><canvas id="chartTop10"></canvas></div></div>
         <div class="chart-card"><div class="chart-title">Evolution CPL mensuel par canal</div><div class="chart-wrap"><canvas id="chartCPLMonthly"></canvas></div></div>
       </div>
+      <div class="section-title" style="font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;margin-bottom:16px">Évolution mensuelle</div>
+      <div class="table-card"><table id="monthlyTable"><thead><tr><th>Mois</th><th>Dépenses</th><th>Leads</th><th>CPL</th></tr></thead><tbody></tbody></table></div>
     </div>
 
     <!-- PAGE: META ADS -->
     <div class="page" id="page-meta">
+      <div class="page-header"><h2>Meta Ads</h2><p>Campagnes Facebook & Instagram</p></div>
+      <div id="metaTopCamp"></div>
       <div class="kpi-grid" id="metaKpis"></div>
       <div class="charts-row">
         <div class="chart-card chart-card-full"><div class="chart-title">Meta — Depenses et Leads quotidiens</div><div class="chart-wrap"><canvas id="chartMetaDaily"></canvas></div></div>
@@ -316,6 +363,8 @@ tbody tr:hover{background:rgba(0,129,231,0.04)}
 
     <!-- PAGE: GOOGLE ADS -->
     <div class="page" id="page-google">
+      <div class="page-header"><h2>Google Ads</h2><p>Search, Display & Performance Max</p></div>
+      <div id="googleTopCamp"></div>
       <div class="kpi-grid" id="googleKpis"></div>
       <div class="charts-row">
         <div class="chart-card chart-card-full"><div class="chart-title">Google — Depenses et Conversions quotidiennes</div><div class="chart-wrap"><canvas id="chartGoogleDaily"></canvas></div></div>
@@ -328,6 +377,8 @@ tbody tr:hover{background:rgba(0,129,231,0.04)}
 
     <!-- PAGE: LINKEDIN ADS -->
     <div class="page" id="page-linkedin">
+      <div class="page-header"><h2>LinkedIn Ads</h2><p>Sponsored Content & Lead Gen</p></div>
+      <div id="linkedinTopCamp"></div>
       <div class="kpi-grid" id="linkedinKpis"></div>
       <div class="charts-row">
         <div class="chart-card chart-card-full"><div class="chart-title">LinkedIn — Depenses et Leads quotidiens</div><div class="chart-wrap"><canvas id="chartLinkedinDaily"></canvas></div></div>
@@ -340,6 +391,7 @@ tbody tr:hover{background:rgba(0,129,231,0.04)}
 
     <!-- PAGE: GA4 -->
     <div class="page" id="page-ga4">
+      <div class="page-header"><h2>GA4 / Site</h2><p>Comportement & Conversions</p></div>
       <div class="kpi-grid" id="ga4Kpis"></div>
       <div class="charts-row">
         <div class="chart-card"><div class="chart-title">Sessions et Conversions quotidiennes</div><div class="chart-wrap"><canvas id="chartGA4Daily"></canvas></div></div>
@@ -443,6 +495,27 @@ var currentPage = 'overview';
 var rawData = {meta:[], google:[], linkedin:[], ga4:[]};
 var loadedCount = 0;
 var charts = {};
+
+/* ============ CENTER TEXT PLUGIN FOR DONUTS ============ */
+var centerTextPlugin = {
+  id: 'centerText',
+  afterDraw: function(chart) {
+    if (chart.config.options.plugins && chart.config.options.plugins.centerText) {
+      var ctx = chart.ctx;
+      var text = chart.config.options.plugins.centerText.text;
+      ctx.save();
+      ctx.font = "700 16px 'Poppins',sans-serif";
+      ctx.fillStyle = '#e8f2ff';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      var cx = (chart.chartArea.left + chart.chartArea.right) / 2;
+      var cy = (chart.chartArea.top + chart.chartArea.bottom) / 2;
+      ctx.fillText(text, cx, cy);
+      ctx.restore();
+    }
+  }
+};
+Chart.register(centerTextPlugin);
 
 var BASE = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTfTJz3BtJFeoTDSH00mfpv4BleUm6pWmcQ_-ZQ9HePp1m8TX70rJK9mjwsAkAGLUA3gD9cZWw6qXpb/pub?output=csv&single=true&gid=';
 var GIDS = {meta:'0', google:'303706772', linkedin:'1554617359', ga4:'911204112'};
@@ -606,6 +679,19 @@ var monthAgo = new Date(today); monthAgo.setDate(monthAgo.getDate()-30);
 document.getElementById('dateFrom').value = monthAgo.toISOString().split('T')[0];
 
 /* ============ LOAD DATA ============ */
+function showSkeletons(){
+  var kpiGrids = ['overviewKpis','metaKpis','googleKpis','linkedinKpis','ga4Kpis'];
+  kpiGrids.forEach(function(id){
+    var el = document.getElementById(id);
+    if(el){
+      var html = '';
+      for(var i=0;i<6;i++) html += '<div class="skeleton skel-kpi"></div>';
+      el.innerHTML = html;
+    }
+  });
+}
+showSkeletons();
+
 function loadData(){
   var sources = ['meta','google','linkedin','ga4'];
   sources.forEach(function(src){
@@ -755,15 +841,41 @@ function renderOverview(){
   charts['chartBudgetDonut'] = new Chart(document.getElementById('chartBudgetDonut'),{
     type:'doughnut',
     data:{labels:['Meta','Google','LinkedIn'],datasets:[{data:[metaSpend,googleSpend,linkedinSpend],backgroundColor:['#1877F2','#34A853','#0A66C2'],borderWidth:0,hoverOffset:8}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{color:'rgba(232,242,255,0.6)',font:{size:11,family:'Inter'},padding:12}}}}
+    options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{centerText:{text:fMoney(spend)},legend:{position:'bottom',labels:{color:'rgba(232,242,255,0.6)',font:{size:11,family:'Inter'},padding:12}}}}
   });
 
   destroyChart('chartLeadsDonut');
   charts['chartLeadsDonut'] = new Chart(document.getElementById('chartLeadsDonut'),{
     type:'doughnut',
     data:{labels:['Meta','Google','LinkedIn'],datasets:[{data:[metaLeads,googleLeads,linkedinLeads],backgroundColor:['#1877F2','#34A853','#0A66C2'],borderWidth:0,hoverOffset:8}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{color:'rgba(232,242,255,0.6)',font:{size:11,family:'Inter'},padding:12}}}}
+    options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{centerText:{text:fNum(leads)+' leads'},legend:{position:'bottom',labels:{color:'rgba(232,242,255,0.6)',font:{size:11,family:'Inter'},padding:12}}}}
   });
+
+  // Funnel Lead Gen
+  var totalImp = impr;
+  var totalClicks = clicks;
+  var totalLeads = leads;
+  var funnelEl = document.getElementById('funnelRow');
+  if(funnelEl){
+    var steps = [
+      {label:'Impressions', count:totalImp, color:'rgba(0,129,231,0.7)'},
+      {label:'Clics', count:totalClicks, color:'rgba(0,129,231,0.5)'},
+      {label:'Leads', count:totalLeads, color:'rgba(0,129,231,0.3)'}
+    ];
+    var fhtml = '';
+    for(var i=0;i<steps.length;i++){
+      var wPct = 100 - i*25;
+      var nbPct = 100 - (i+1)*25;
+      var lPx=(100-wPct)/2; var lbPx=(100-nbPct)/2;
+      fhtml += '<div class="funnel-step" style="width:'+wPct+'%;background:'+steps[i].color+';clip-path:polygon('+lPx+'% 0,'+(100-lPx)+'% 0,'+(100-lbPx)+'% 100%,'+lbPx+'% 100%)">';
+      fhtml += '<span>'+steps[i].label+'<span class="f-count">'+fNum(steps[i].count)+'</span></span></div>';
+      if(i<steps.length-1){
+        var rate = steps[i].count > 0 ? ((steps[i+1].count/steps[i].count)*100).toFixed(1) : '0';
+        fhtml += '<div class="funnel-rate">\u2193 '+rate+'%</div>';
+      }
+    }
+    funnelEl.innerHTML = fhtml;
+  }
 }
 
 /* ============ RENDER: PERFORMANCES ============ */
@@ -858,6 +970,43 @@ function renderPerformances(){
     ]},
     options:chartDefaults()
   });
+
+  // Monthly summary table
+  var monthlyTbody = document.querySelector('#monthlyTable tbody');
+  if(monthlyTbody){
+    var mhtml = '';
+    months.forEach(function(m, idx){
+      var mFrom = new Date(m.year,m.month,1);
+      var mTo = new Date(m.year,m.month+1,0,23,59,59);
+      var range = {from:mFrom,to:mTo};
+      var mm = filterByDateRange(rawData.meta,range);
+      var mg = filterByDateRange(rawData.google,range);
+      var ml = filterByDateRange(rawData.linkedin,range);
+      var mSpend = sumField(mm,'Cost (EUR)') + sumField(mg,'Cost (EUR)') + sumField(ml,'Total spent (EUR)');
+      var mLeads = sumField(mm,'On-Facebook leads') + sumField(mg,'Conversions') + sumField(ml,'Leads');
+      var mCpl = mLeads > 0 ? mSpend/mLeads : 0;
+      mhtml += '<tr><td>'+monthLabel(m.month,m.year)+'</td><td>'+fMoney(mSpend)+'</td><td>'+fNum(mLeads)+'</td><td class="'+cplClass(mCpl)+'">'+fMoney(mCpl)+'</td></tr>';
+    });
+    monthlyTbody.innerHTML = mhtml;
+  }
+}
+
+/* ============ TOP CAMPAIGN HELPER ============ */
+function renderTopCampaign(containerId, campaigns){
+  var el = document.getElementById(containerId);
+  if(!el) return;
+  var best = null;
+  Object.values(campaigns).forEach(function(c){
+    var leads = c.leads || c.conv || 0;
+    if(leads < 1) return;
+    var cpl = c.spend / leads;
+    if(!best || cpl < best.cpl) best = {name:c.name, cpl:cpl, leads:leads, spend:c.spend};
+  });
+  if(best){
+    el.innerHTML = '<div class="top-camp-card"><div class="top-camp-badge">Meilleur CPL</div><div class="top-camp-name">'+best.name+'</div><div class="top-camp-cpl">'+fMoney(best.cpl)+'</div></div>';
+  } else {
+    el.innerHTML = '';
+  }
 }
 
 /* ============ RENDER: META ============ */
@@ -900,6 +1049,9 @@ function renderMeta(){
   });
   var rows = Object.values(campaigns);
   rows.sort(function(a,b){return b.spend-a.spend});
+
+  renderTopCampaign('metaTopCamp', campaigns);
+
   var tbody = document.querySelector('#tableMeta tbody');
   tbody.innerHTML = rows.map(function(r){
     var ctr2=r.impressions>0?(r.clicks/r.impressions)*100:0;
@@ -964,6 +1116,9 @@ function renderGoogle(){
   });
   var rows = Object.values(campaigns);
   rows.sort(function(a,b){return b.spend-a.spend});
+
+  renderTopCampaign('googleTopCamp', campaigns);
+
   var tbody = document.querySelector('#tableGoogle tbody');
   tbody.innerHTML = rows.map(function(r){
     var ctr2=r.impressions>0?(r.clicks/r.impressions)*100:0;
@@ -1027,6 +1182,9 @@ function renderLinkedin(){
   });
   var rows = Object.values(campaigns);
   rows.sort(function(a,b){return b.spend-a.spend});
+
+  renderTopCampaign('linkedinTopCamp', campaigns);
+
   var tbody = document.querySelector('#tableLinkedin tbody');
   tbody.innerHTML = rows.map(function(r){
     var ctr2=r.impressions>0?(r.clicks/r.impressions)*100:0;
@@ -1111,6 +1269,22 @@ function renderGA4(){
   });
 }
 
+/* ============ KPI ICONS MAP ============ */
+var kpiIcons = {
+  'Depenses totales': {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>', color:'orange'},
+  'Depenses': {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>', color:'orange'},
+  'Leads totaux': {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>', color:'blue'},
+  'Leads': {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>', color:'blue'},
+  'CPL moyen': {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>', color:'green'},
+  'CPL': {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>', color:'green'},
+  'CPA': {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>', color:'green'},
+  'Impressions': {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>', color:'purple'},
+  'Clics': {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l7.07 17 2.51-7.39L21 11.07z"/></svg>', color:'cyan'},
+  'CTR moyen': {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>', color:'teal'},
+  'CTR': {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>', color:'teal'},
+  'Conversions': {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>', color:'blue'}
+};
+
 /* ============ KPI GRID RENDERER ============ */
 function renderKpiGrid(containerId, kpis){
   var container = document.getElementById(containerId);
@@ -1122,7 +1296,12 @@ function renderKpiGrid(containerId, kpis){
       changeHtml = '<span class="kpi-change '+dir+'">'+arrow+' '+Math.abs(k.change).toFixed(1)+'%</span>';
     }
     var cls = k.cplClass||'';
-    return '<div class="kpi-card '+cls+'"><div class="kpi-label">'+k.label+'</div><div class="kpi-value">'+k.value+'</div>'+changeHtml+'</div>';
+    var iconHtml = '';
+    var iconData = kpiIcons[k.label];
+    if(iconData){
+      iconHtml = '<div class="kpi-icon '+iconData.color+'">'+iconData.icon+'</div>';
+    }
+    return '<div class="kpi-card '+cls+'">'+iconHtml+'<div class="kpi-label">'+k.label+'</div><div class="kpi-value">'+k.value+'</div>'+changeHtml+'</div>';
   }).join('');
 }
 
